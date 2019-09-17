@@ -1,7 +1,8 @@
-function DalijimasPusiauPvz
+function DalijimasPusiau
 % Dalijimo pusiau metodu randamas funkcijos f(x) minimumas intervale [l,r].
 
-f=@(x)(x.^2-1).^2-1;
+f=@(x)(((x.^2-4).^2)/7) - 1;
+
 l=0;   % apatinis intervalo rezis
 r=10;  % desinysis intervalo rezis
 
@@ -19,7 +20,6 @@ xlabel('x asis');
 ylabel('y asis');
 title(['Funkcijos y=f(x) grafikas ir artiniai']);
 
-
 %Metodo realizavimas
 L=r-l;      %intervalo ilgis
 xm=(l+r)/2; %intervalo vidurio taskas
@@ -27,9 +27,15 @@ ym=f(xm);
 
 disp(['     xm        ym        k         funkc. kviet. sk']);
 
-format short   % Jeigu noresi trumpesnio formato, uzkomentuok eilute :)
+format long
+
 while L>= epsilon
-      disp([xm, ym, k, 2*k+1]);
+
+      format long
+      disp([xm, ym]);
+      format short
+      disp([k, 2*k+1]);
+      
       hold on;
       plot(xm, ym, 'ro');
       
@@ -48,14 +54,10 @@ while L>= epsilon
       else
           l = x1;
           r = x2;
-      end
-            
-           
-
-      
-          
-          
+      end   
+             
       if k==kmax
+          format short
           disp(['Pasiektas maksimalus iteraciju skaicius k=', num2str(kmax)]);
           break
       end   
@@ -64,23 +66,3 @@ while L>= epsilon
       L=r-l;
 end
 end
-
-
-    
-    
-     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

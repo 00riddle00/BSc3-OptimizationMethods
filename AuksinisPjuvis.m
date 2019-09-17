@@ -1,7 +1,8 @@
-function AuksinioPjuvioPvz
+function AuksinisPjuvis
 % Aksinio pjuvio metodu randamas funkcijos f(x) minimumas intervale [l,r].
 
-f=@(x)(x.^2-1).^2-1;
+f=@(x)(((x.^2-4).^2)/7) - 1;
+
 l=0;   % apatinis intervalo rezis
 r=10;  % desinysis intervalo rezis
 
@@ -19,7 +20,6 @@ xlabel('x asis');
 ylabel('y asis');
 title(['Funkcijos y=f(x) grafikas ir artiniai']);
 
-
 %Metodo realizavimas
 %L=r-l;      %intervalo ilgis
 %xm=(l+r)/2; %intervalo vidurio taskas
@@ -27,7 +27,7 @@ title(['Funkcijos y=f(x) grafikas ir artiniai']);
 
 disp(['     xm        ym        k         funkc. kviet. sk']);
 
-format short   % Jeigu noresi trumpesnio formato, uzkomentuok eilute :)
+format long
 
 gR = (sqrt(5) - 1) / 2;
 
@@ -38,7 +38,11 @@ x2 = l + gR*L;
 y2 = f(x2);
 
 while L>= epsilon
-      disp([x1, y1, k, k+2]);
+      format long
+      disp([x1, y1]);
+      format short
+      disp([k, k+2]);
+            
       hold on;
       plot(x1, y1, 'ro');
           
@@ -57,14 +61,10 @@ while L>= epsilon
           y2=y1;
           x1 = r - gR*L;
           y1 = f(x1);
-      end
-            
-           
-
-      
-          
+      end 
           
       if k==kmax
+          format short
           disp(['Pasiektas maksimalus iteraciju skaicius k=', num2str(kmax)]);
           break
       end   
@@ -73,23 +73,3 @@ while L>= epsilon
       L=r-l;
 end
 end
-
-
-    
-    
-     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,9 +1,10 @@
 function NiutonoMetodas
-% Dalijimo pusiau metodu randamas funkcijos f(x) minimumas intervale [l,r].
+% Niutono metodu randamas funkcijos f(x) minimumas intervale [l,r].
 
-f=@(x)(x.^2-5).^2/4-1;
-f1=@(x)x*(x.^2-5);
-f2=@(x)3*x.^2-5;
+f=@(x)((x.^2-4).^2)/7-1;
+f1=@(x)4*x*(x.^2-4)/7;
+f2=@(x)4*(3*x.^2-4)/7;
+
 l=0;   % apatinis intervalo rezis
 r=10;  % desinysis intervalo rezis
 
@@ -21,28 +22,33 @@ xlabel('x asis');
 ylabel('y asis');
 title(['Funkcijos y=f(x) grafikas ir artiniai']);
 
-
 %Metodo realizavimas
 
 x0=5;
 delta=1;
 disp(['     x1        x2        k         funkc. kviet. sk']);
 
-format short   % Jeigu noresi trumpesnio formato, uzkomentuok eilute :)
+format long
 
 while delta>=epsilon
       x1=x0-f1(x0)/f2(x0);
       y1=f(x1);
       delta=abs(x1-x0);
       x0=x1;
-      disp([x1, y1, k, 2*k]);
+
+      format long
+      disp([x1, y1]);
+      format short
+      disp([k, 2*k]);
+                 
       hold on
       plot(x1, y1, 'ro')
       
       if k==kmax
+          format short
           disp(['Pasiektas maksimalus iteraciju skaicius k=', num2str(kmax)]);
           break
       end 
       k=k+1;
 end
-ends
+end
