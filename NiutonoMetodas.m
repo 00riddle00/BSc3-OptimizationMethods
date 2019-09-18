@@ -26,7 +26,7 @@ title(['Funkcijos y=f(x) grafikas ir artiniai']);
 
 x0=5;
 delta=1;
-disp(['     x1        x2        k         funkc. kviet. sk']);
+disp(['     x1        y1        k         funkc. kviet. sk']);
 
 format long
 

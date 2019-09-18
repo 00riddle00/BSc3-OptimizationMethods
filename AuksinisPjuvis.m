@@ -25,7 +25,7 @@ title(['Funkcijos y=f(x) grafikas ir artiniai']);
 %xm=(l+r)/2; %intervalo vidurio taskas
 %ym=f(xm);
 
-disp(['     xm        ym        k         funkc. kviet. sk']);
+disp(['     x1        y1        k         funkc. kviet. sk']);
 
 format long
 
