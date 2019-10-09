@@ -47,8 +47,6 @@ while norma >= epsilon
       
       subplot(1,2,2);
       title(['Artiniai'])
-      %fig = gcf;
-      %fig.Color = [1 0.4 0.6];
       plot(X0(1), X0(2), 'mo');
       hold on;
       
