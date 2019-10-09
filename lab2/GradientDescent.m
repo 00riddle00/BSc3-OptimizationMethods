@@ -4,16 +4,20 @@ f=@(x1, x2)(1/8)*((x1.^2).*x2 + x1.*(x2.^2) - x1.*x2);
 
 % ieskome min(f(x1, x2))
 
-gradf=@(X) [2*X(1)*X(2) + X(2).^2 - X(2), 
-            X(1)^2 + 2*X(1)*X(2) - X(1)];
-
-X0 = [1/2,1/2];
-#X0 = [0,0]
-%X1 = [1,1]
+gradf=@(X) [2*X(1)*X(2) + X(2).^2 - X(2), X(1)^2 + 2*X(1)*X(2) - X(1)];       
+            
+%X0 = [1/2,1/2];
+%X0 = [0,0]
+X0 = [1,1]
 %Xm = [4/10, 7/10]
 
+subplot(1,2,1)
+[x1,x2] = meshgrid(0:0.01:1, 0:0.01:1);
+y = f(x1, x2)
+surf(x1, x2, y);
+
 %gamma_reziai = [0,1]
-gamma = 1/2;
+gamma = 1;
 
 epsilon=10^(-4); %tikslumas
 
@@ -39,15 +43,17 @@ format long
 
 norma = Inf;
 
-while norma >=epsilon
+while norma >= epsilon
   
       grad = gradf(X0);
-      X1 = X0 - gamma * grad;
-      norma = norm(grad)
+      X0 = X0 - gamma.*grad;
+      norma = norm(grad);
  
-      fprintf('%f %f %f %d %d\n', X1, f( X1(1), X1(2) ), k, k);             
-      hold on
-      plot(x1, y1, 'ro')
+      fprintf('%f %f %f %d %d\n', X0, f( X0(1), X0(2) ), k, k);             
+      
+      subplot(1,2,2);
+      plot(X0(1), X0(2), 'o'); % X1 -naujas artinys 
+      hold on;
       
       if k==kmax
           format short
@@ -55,6 +61,8 @@ while norma >=epsilon
           break
       end 
       k=k+1;
-      X0 = X1;
+
 end
+grid on;
+hold off;
 end
