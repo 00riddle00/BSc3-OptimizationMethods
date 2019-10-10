@@ -12,7 +12,7 @@ X_m = [4/10, 7/10]
 X_n = [1/2,1/2];
 
 % pasirenkamas pradinis artinys
-X0 = X_m
+X0 = X_1
 
 %Funkcijos grafiko y=f(x1,x2) braizymas
 subplot(1,2,1)
@@ -22,7 +22,7 @@ surf(x1, x2, y);
 title(['Funkcijos y=f(x1,x2) grafikas'])
 
 % pasirenkamas parametras
-gamma = 1.3;
+gamma = 0.33;
 
 epsilon=10^(-4); %tikslumas
 
@@ -46,7 +46,7 @@ while norma >= epsilon
       fprintf('%f %f %f %d %d\n', X0, f( X0(1), X0(2) ), k, k);             
       
       subplot(1,2,2);
-      title(['Artiniai'])
+      title(['Artiniai (pradinis taškas: X1)'])
       plot(X0(1), X0(2), 'mo');
       hold on;
       
