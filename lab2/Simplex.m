@@ -10,7 +10,7 @@ X_m=[4/10, 7/10];
 X_n=[1/2,1/2];
 
 % pasirenkamas pradinis artinys
-X0 = X_n;
+X0 = X_1;
 
 %Funkcijos grafiko y=f(x1,x2) braizymas
 %subplot(1,2,1)
@@ -75,6 +75,7 @@ pabaigti=false;
     % Randami Xh, Xg, Xl ir funkcijos reiksmes siuose taskuose yh, yg, yl
     [~, nr]=sort(y); % y0, y1, y2 reiksmes isdestomos didejimo tvarka; nr rodys ju numerius ma....
 
+    % TODO rm comment
     % [B,I] = sort(___) also returns a collection of index vectors for any of the previous syntaxes. 
     % I is the same size as A and describes the arrangement of the elements of A into B along the sorted
     % dimension. For example, if A is a vector, then B = A(I).
