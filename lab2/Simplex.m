@@ -45,19 +45,19 @@ y0=f(X0);
 y1=f(X1);
 y2=f(X2);
 
+% /////32/////
 y=[y0,y1,y2];
 X=[X0;X1;X2];
-
-% /////32/////
-
 
 % //////36/////
 % Pradinio simplekso braizymas:
 deltax=[X0(1),X0(1),X1(1);X1(1),X2(1),X2(1)];
 deltay=[X0(2),X0(2),X1(2);X1(2),X2(2),X2(2)];
-plot(deltax,deltay,'b')
+plot(deltax,deltay,'b');
+hold on;
 plot(X(:,1),X(:,2),'mo');
-grid on
+hold on;
+grid on;
 
 k=1; % iteraciju skaitliukas
 i=3; % funkcijos kvietimu skaiciaus skaitliukas
@@ -184,8 +184,8 @@ pabaigti=false;
     % Simplekso braizymas:
     deltax=[Xl(1),Xl(1),Xg(1);Xg(1),Xnew(1),Xnew(1)];
     deltay=[Xl(2),Xl(2),Xg(2);Xg(2),Xnew(2),Xnew(2)];
-    plot(deltax,deltay,'b')
-    hold on
+    plot(deltax,deltay,'b');
+    hold on;
     plot(X(:,1),X(:,2),'mo');
-    hold on
+    hold on;
   end  
