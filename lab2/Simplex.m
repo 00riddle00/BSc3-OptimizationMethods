@@ -10,7 +10,7 @@ X_m=[4/10, 7/10];
 X_n=[1/2,1/2];
 
 % pasirenkamas pradinis artinys
-X0 = X_m;
+X0 = X_1;
 
 % pasirenkami parametrai
 gamma=2;
@@ -26,8 +26,8 @@ n=2;
 delta1=alpha*(sqrt(n+1)+n-1)/(n*sqrt(2));
 delta2=alpha*(sqrt(n+1)-1)/(n*sqrt(2));
 
-X1=[X0(1)+delta2,X0(2)+delta1];
-X2=[X0(1)+delta1,X0(2)+delta2];
+X1=[X0(1,1)+delta2,X0(1,2)+delta1];
+X2=[X0(1,1)+delta1,X0(1,2)+delta2];
 
 y0=f(X0);
 y1=f(X1);
@@ -149,7 +149,7 @@ pabaigti=false;
         count=count+1;
           if count==3
             disp(' ');
-            disp('Patenkinamos sustojimo salygos. Skaiciavimai baigiami, new:');
+            disp('Patenkinamos sustojimo salygos. Skaiciavimai baigiami, nes:');
             disp(['1) simpleksas tapo mazas (krastiniu ilgiai mazesni uz epsilon=', num2str(epsilon)]);
             % disp(['1) simpleksas tapo mazas (krastiniu ilgiai mazesni uz epsilon=', num2...
             disp(['2) funkcijos reiksmes simplekso virsunes panasios (tikslumu epsilon=', num2str(epsilon)]);
@@ -167,7 +167,7 @@ pabaigti=false;
     end     
       
     k=k+1;
-    disp('ITER');
+    disp(' ');
     y=[yl,yg,ynew];
     X=[Xl;Xg;Xnew];
    
