@@ -58,9 +58,6 @@ deltay=[X0(2),X0(2),X1(2);X1(2),X2(2),X2(2)];
 plot(deltax,deltay,'b')
 plot(X(:,1),X(:,2),'mo');
 grid on
-hold on
-% plot(X(:,1),X(:,2),'mo'); % Atkomentuoti, jei norima pavaizduoti bandymo taskus rutuliukais...
-% hold on
 
 k=1; % iteraciju skaitliukas
 i=3; % funkcijos kvietimu skaiciaus skaitliukas
