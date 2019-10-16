@@ -1,8 +1,7 @@
 function Simplex
 
+% Daugiklis 1/8 ignoruojamas, kadangi neturi itakos rezultatui
 f=@(X) (X(1).^2).*X(2) + X(1).*(X(2).^2) - X(1).*X(2);
-
-// gradf=@(X) [2*X(1)*X(2) + X(2).^2 - X(2), X(1)^2 + 2*X(1)*X(2) - X(1)];       
 
 % pradiniai artinai
 X_0=[0,0]
@@ -13,12 +12,13 @@ X_n=[1/2,1/2];
 % pasirenkamas pradinis artinys
 X0 = X_n
 
-// %Funkcijos grafiko y=f(x1,x2) braizymas
-// subplot(1,2,1)
-// [x1,x2] = meshgrid(0:0.01:1, 0:0.01:1);
-// y = f(x1, x2)
-// surf(x1, x2, y);
-// title(['Funkcijos y=f(x1,x2) grafikas'])
+%Funkcijos grafiko y=f(x1,x2) braizymas
+subplot(1,2,1)
+[X(1),X(2)] = meshgrid(0:0.01:1, 0:0.01:1);
+y = f(X)
+surf(X(1),X(2), y);
+title(['Funkcijos y=f(X) grafikas'])
+% plot()
 
 % pasirenkami parametrai
 gamma=2;
@@ -44,16 +44,16 @@ X2=[X0(1,1)+delta1,X0(1,2)+delta2];
 y0=f(X0);
 y1=f(X1);
 y2=f(X2);
-/////31/////
+% /////31/////
 
 
-/////36/////
+% /////36/////
 deltax=[X0(1),X0(1),X1(1);X1(1),X2(1),X(1)];
 deltay=[X0(2),X0(2),X1(2);X1(2),X2(2),X2(2)];
-plot(deltax,deltay,'r')
+plot(deltax,deltay,'m')
 grid on
 hold on
-% plot(X(:,1),X(:,2),'mo');
+% plot(X(:,1),X(:,2),'mo'); % Atkomentuoti, jei norima pavaizduoti bandymo taskus rutuliukais...
 % hold on
 
 k=1; % iteraciju skaitliukas
@@ -136,12 +136,14 @@ pabaigti=false;
     count=0;
 
     if max([norm(X1-Xg),norm(X1-Xh),norm(Xg-Xh)])<epsilon
-        disp(['Simpleksas tapo mazas (krastiniu ilgiai mazesni uz epsilon=', num2str(epsilon),....
+        disp(['Simpleksas tapo mazas (krastiniu ilgiai mazesni uz epsilon=', num2str(epsilon)]);
+        % disp(['Simpleksas tapo mazas (krastiniu ilgiai mazesni uz epsilon=', num2str(epsilon),....
         count=count+1;
     end
-
-    if abc(yh-y1)<epsilon
-        disp(['Funkcijos reiksmes simplekso virsunese panasios (tikslumu epsilon=', num2str(ep...
+    
+    if abs(yh-yl)<epsilon
+        disp(['Funkcijos reiksmes simplekso virsunese panasios (tikslumu epsilon=', num2str(epsilon)]);
+        %disp(['Funkcijos reiksmes simplekso virsunese panasios (tikslumu epsilon=', num2str(ep...
         count=count+1;
     end
 
@@ -156,7 +158,7 @@ pabaigti=false;
             pabaigti=true;
           end
     end
-    if k==kmax  <---???
+    %if k==kmax  <---???
     k=k+1;
     y=[y1,yg,ynew];
     X=[X1;Xg;Xnew];
