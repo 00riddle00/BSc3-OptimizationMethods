@@ -25,7 +25,7 @@ n = 2; % keliu kintamuju funkcija yra minimizuojama
 delta1 = alpha * (sqrt(n + 1) + n - 1) / (n * sqrt(2));
 delta2 = alpha * (sqrt(n + 1) - 1) / (n * sqrt(2));
 
-% kitos simplekso virsunes
+% kitos simplekso virsunes (apskaiciuojame pagal teorine medziaga)
 X1 = [X0(1, 1) + delta2, X0(1, 2) + delta1];
 X2 = [X0(1, 1) + delta1, X0(1, 2) + delta2];
 
@@ -161,8 +161,11 @@ while ~ goal
     endif
  
     k = k + 1;
-    y = [yl, yg, ynew];
+    % naujas artinys
     X = [Xl; Xg; Xnew];
+    % funckijos reiksmes naujame artinyje
+    y = [yl, yg, ynew];
+
  
     % Simplekso braizymas:
     deltax = [Xl(1), Xl(1), Xg(1); Xg(1), Xnew(1), Xnew(1)];
