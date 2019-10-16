@@ -199,11 +199,11 @@ pabaigti=false;
           end
     end
  
-    %if k==kmax
-    %  format short;
-    %  disp(['Pasiektas maksimalus iteraciju skaicius k=', num2str(kmax)]);
-    %  break
-    %end     
+    if k==kmax
+      format short;
+      disp(['Pasiektas maksimalus iteraciju skaicius k=', num2str(kmax)]);
+      break
+    end     
       
     k=k+1;
     disp(' ');
