@@ -5,7 +5,7 @@ f=@(x1, x2) (1/8)*((x1.^2).*x2 + x1.*(x2.^2) - x1.*x2);
 
 gradf=@(X) [2*X(1)*X(2) + X(2).^2 - X(2), X(1)^2 + 2*X(1)*X(2) - X(1)];       
 
-% pradiniai artinai
+% pradiniai artiniai
 X_0 = [0,0]
 X_1 = [1,1]
 X_m = [4/10, 7/10]
