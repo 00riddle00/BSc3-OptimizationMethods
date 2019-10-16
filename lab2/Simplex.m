@@ -1,7 +1,7 @@
 function Simplex
 
 % Daugiklis 1/8 ignoruojamas, kadangi neturi itakos rezultatui
-f = @(X) (X(1) .^ 2) .* X(2) + X(1) .* (X(2) .^ 2) - X(1) .* X(2);
+f = @(X) (1 / 8) * (X(1) .^ 2) .* X(2) + X(1) .* (X(2) .^ 2) - X(1) .* X(2);
 
 % pradiniai artiniai
 X_0 = [0, 0];
