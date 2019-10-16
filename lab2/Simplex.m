@@ -62,10 +62,16 @@ y2
 disp('--------------------');
 disp(' ');
 
-
 % /////32/////
 y=[y0,y1,y2];
 X=[X0;X1;X2];
+
+%fprintf("debug0: %f %f %f", X, y);
+
+%fprintf("debug1");
+%X
+%y
+
 
 % //////36/////
 % Pradinio simplekso braizymas:
@@ -95,6 +101,9 @@ pabaigti=false;
     % Randami Xh, Xg, Xl ir funkcijos reiksmes siuose taskuose yh, yg, yl
     [~, nr]=sort(y); % y0, y1, y2 reiksmes isdestomos didejimo tvarka; nr rodys ju numerius ma....
 
+    %fprintf("debug2");
+    %nr
+
     % TODO rm comment
     % [B,I] = sort(___) also returns a collection of index vectors for any of the previous syntaxes. 
     % I is the same size as A and describes the arrangement of the elements of A into B along the sorted
@@ -104,15 +113,24 @@ pabaigti=false;
     Xl=X(nr(1),:);
 
     yh=y(nr(n+1)); % didziausia y reiksme  
-    Xh=X(nr(n+1)); 
+    Xh=X(nr(n+1),:); 
 
     yg=y(nr(n)); % antra pagal dydi y reiksme
     Xg=X(nr(n),:);
 
     % Viduriu tasko Xc ir naujo artinio Xnew apskaiciavimas
     Xc=(Xg+Xl)/2;
+
+
+    %Xl
+    %Xg
+    %Xh
+    %Xc
+
+
     Xnew=Xh+(1+teta)*(Xc-Xh);
     ynew=f(Xnew);
+    %fprintf("debug3: %f %f %f", Xnew, ynew);
     i=i+1;
 
 

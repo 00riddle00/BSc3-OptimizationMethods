@@ -35,16 +35,25 @@ plot(deltax, deltay, 'r');
 i=3; %funkcij� kvietimo skaitliukas
 imax=100; %maksimalus funkciju kvietimo skaicius
 k=0; %iteraciju skaitliukas
-kmax=100; %maksimalus iteraciju skaitliukas
+kmax=2; %maksimalus iteraciju skaitliukas
 
 disp(['    x1        x2       f(x1,x2)   k         funkc. kviet. sk']);
 
+fprintf("debug0: %f %f %f", X, Y);
+
+fprintf("debug1");
+X
+Y
 
 testi=true;
 while testi
 
     k=k+1;
     [~,nr]=sort(Y);
+
+    fprintf("debug2");
+    nr
+
 % Ma�iausias
     yl=Y(nr(1));
     Xl=X(nr(1),:);
@@ -56,9 +65,15 @@ while testi
     Xg=X(nr(2),:);
 
     Xc=(Xg+Xl)/2;
+
+    Xl
+    Xg
+    Xh
+    Xc
     
     Xnaujas=Xh+(1+theta)*(Xc-Xh);
     ynaujas=f(Xnaujas);
+    fprintf("debug3: %f %f %f", Xnaujas, ynaujas);
     i=i+1;
     if Xnaujas(1) <= 0 || Xnaujas(2) <= 0
         theta=eta;
@@ -111,6 +126,7 @@ while testi
     fprintf('%d %d %f %f %f\n', k, i, Xnaujas, ynaujas);
       if k==kmax
           disp(['Pasiektas maksimalus iteraciju skaicius k=', num2str(kmax)]);
+          break;
       end 
       
       count=0;
