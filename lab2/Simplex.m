@@ -1,6 +1,7 @@
 function Simplex
 
 f = @(X) (1 / 8) * ((X(1) .^ 2) .* X(2) + X(1) .* (X(2) .^ 2) - X(1) .* X(2));
+
 % pradiniai artiniai
 X_0 = [0, 0];
 X_1 = [1, 1];
