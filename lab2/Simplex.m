@@ -37,7 +37,7 @@ teta=1;
 epsilon=10^(-4); %tikslumas
 
 %Pradinio simplekso sudarymas
-alpha=1/2;
+alpha=1;%1/2;
 n=2;
 delta1=alpha*(sqrt(n+1)+n-1)/(n*sqrt(2));
 delta2=alpha*(sqrt(n+1)-1)/(n*sqrt(2));
@@ -114,6 +114,15 @@ pabaigti=false;
     Xnew=Xh+(1+teta)*(Xc-Xh);
     ynew=f(Xnew);
     i=i+1;
+
+
+
+
+
+
+
+
+
 
     % Jei bent viena neigiama koordinate, keiciame krypti
     if Xnew(1)<=0 || Xnew(2)<=0
