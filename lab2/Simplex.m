@@ -20,21 +20,27 @@ teta=1;
 
 epsilon=10^(-4); %tikslumas
 
-%Pradinio simplekso sudarymas
-alpha=1/2;
-n=2;
+% Pradinio simplekso sudarymas
+alpha=1/2; % reguliuoja simplekso krastines ilgi
+n=2; % keliu kintamuju funkcija yra minimizuojama
 delta1=alpha*(sqrt(n+1)+n-1)/(n*sqrt(2));
 delta2=alpha*(sqrt(n+1)-1)/(n*sqrt(2));
 
+% kitos simplekso virsunes
 X1=[X0(1,1)+delta2,X0(1,2)+delta1];
 X2=[X0(1,1)+delta1,X0(1,2)+delta2];
 
+% funkcijos reiksmes simplekso virsunese
 y0=f(X0);
 y1=f(X1);
 y2=f(X2);
 
-y=[y0,y1,y2];
+% simplekso virsuniu masyvas
 X=[X0;X1;X2];
+
+% funkcijos reiksmiu simplekso virsunese masyvas
+y=[y0,y1,y2];
+
 
 % Pradinio simplekso braizymas:
 deltax=[X0(1),X0(1),X1(1);X1(1),X2(1),X2(1)];
@@ -42,10 +48,10 @@ deltay=[X0(2),X0(2),X1(2);X1(2),X2(2),X2(2)];
 plot(deltax,deltay,'b');
 grid on;
 hold on;
-plot(X(:,1),X(:,2),'mo');
+plot(X(:,1),X(:,2),'mo'); % atvaizduoja bandymo taskus rutuliukais 
 hold on;
 
-k=1; % iteraciju skaitliukas
+k=1; % iteraciju skaitliukas (pradinio simplekso sudarymas = 1 iteracija)
 i=3; % funkcijos kvietimu skaiciaus skaitliukas
 kmax=100; % maksimalus iteraciju skaicius
 imax=100; % maksimalus funkcijos kvietimu skaicius
@@ -56,18 +62,10 @@ format short;
 disp(['   x1   x2    f(x1,x2)    k    (f kv. sk.)']);
 disp('-----------------------------------------------');
 
-pabaigti=false;
-  while ~pabaigti
+goal=false;
+  while ~goal
     % Randami Xh, Xg, Xl ir funkcijos reiksmes siuose taskuose yh, yg, yl
-    [~, nr]=sort(y); % y0, y1, y2 reiksmes isdestomos didejimo tvarka; nr rodys ju numerius ma....
-
-    %fprintf("debug2");
-    %nr
-
-    % TODO rm comment
-    % [B,I] = sort(___) also returns a collection of index vectors for any of the previous syntaxes. 
-    % I is the same size as A and describes the arrangement of the elements of A into B along the sorted
-    % dimension. For example, if A is a vector, then B = A(I).
+    [~, nr]=sort(y); % y0, y1, y2 reiksmes isdestomos didejimo tvarka; nr rodys ju numerius masyve y
     
     yl=y(nr(1)); % maziausia y reiksme
     Xl=X(nr(1),:);
@@ -81,26 +79,9 @@ pabaigti=false;
     % Viduriu tasko Xc ir naujo artinio Xnew apskaiciavimas
     Xc=(Xg+Xl)/2;
 
-
-    %Xl
-    %Xg
-    %Xh
-    %Xc
-
-
     Xnew=Xh+(1+teta)*(Xc-Xh);
     ynew=f(Xnew);
-    %fprintf("debug3: %f %f %f", Xnew, ynew);
     i=i+1;
-
-
-
-
-
-
-
-
-
 
     % Jei bent viena neigiama koordinate, keiciame krypti
     if Xnew(1)<=0 || Xnew(2)<=0
@@ -109,10 +90,9 @@ pabaigti=false;
         Xnew=Xh+(1+teta)*(Xc-Xh);
         ynew=f(Xnew);
         i=i+1;
-    end
+    endif
 
     % Naujo simplekso sudarymas
-
     if (yl<ynew) && (ynew<yg)
         teta=1;
     elseif ynew<yl
@@ -123,7 +103,7 @@ pabaigti=false;
       if yz<ynew
           ynew=yz;
           Xnew=Z;
-      end
+      endif
     elseif ynew>yh
       teta=eta;
       Z=Xh+(1+teta)*(Xc-Xh);
@@ -136,7 +116,7 @@ pabaigti=false;
       Xnew=Z;
       ynew=f(Z);
       i=i+1;
-    end
+    endif
 
     if Xnew(1)<=0 || Xnew(2)<=0
       disp('Neigiama artinio koordinate! Keiciame krypti.');
@@ -144,7 +124,7 @@ pabaigti=false;
       Xnew=Xh+(1+teta)*(Xc-Xh);
       ynew=f(Xnew);
       i=i+1;
-    end
+    endif
 
     fprintf('%f    %f   %f %d   %d', Xnew, ynew, k, i);
 
@@ -152,15 +132,13 @@ pabaigti=false;
 
     if max([norm(Xl-Xg),norm(Xl-Xh),norm(Xg-Xh)])<epsilon
         disp(['Simpleksas tapo mazas (krastiniu ilgiai mazesni uz epsilon=', num2str(epsilon)]);
-        % disp(['Simpleksas tapo mazas (krastiniu ilgiai mazesni uz epsilon=', num2str(epsilon), ....
         count=count+1;
-    end
-    
-    if abs(yh-yl)<epsilon
+    endif
+
+    if max([abs(yl-yg),abs(yl-yh),abs(yg-yh)])<epsilon
         disp(['Funkcijos reiksmes simplekso virsunese panasios (tikslumu epsilon=', num2str(epsilon)]);
-        %disp(['Funkcijos reiksmes simplekso virsunese panasios (tikslumu epsilon=', num2str(ep...
         count=count+1;
-    end
+    endif
 
     if i>=imax
         count=count+1;
@@ -168,20 +146,17 @@ pabaigti=false;
             disp(' ');
             disp('Patenkinamos sustojimo salygos. Skaiciavimai baigiami, nes:');
             disp(['1) simpleksas tapo mazas (krastiniu ilgiai mazesni uz epsilon=', num2str(epsilon)]);
-            % disp(['1) simpleksas tapo mazas (krastiniu ilgiai mazesni uz epsilon=', num2...
             disp(['2) funkcijos reiksmes simplekso virsunes panasios (tikslumu epsilon=', num2str(epsilon)]);
-            % disp(['2) funkcijos reiksmes simplekso virsunes panasios (tikslumu epsilon='...
             disp(['3) pasiektas maksimalus funkciju kvietimu skaicius=', num2str(imax)]);
-            % disp(['3) pasiektas maksimalus funkciju kvietimu skaicius=', num2str(imax)...
-            pabaigti=true;
-          end
-    end
+            goal=true;
+          endif
+    endif
  
     if k==kmax
       format short;
       disp(['Pasiektas maksimalus iteraciju skaicius k=', num2str(kmax)]);
       break
-    end     
+    endif
       
     k=k+1;
     disp(' ');
@@ -195,4 +170,4 @@ pabaigti=false;
     hold on;
     plot(X(:,1),X(:,2),'mo');
     hold on;
-  end  
+  endwhile

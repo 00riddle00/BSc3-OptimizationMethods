@@ -54,10 +54,10 @@ while norma >= epsilon
           format short;
           disp(['Pasiektas maksimalus iteraciju skaicius k=', num2str(kmax)]);
           break
-      end 
+      endif
       k=k+1;
 
-end
+endwhile
 grid on;
 hold off;    
-end
+endprogram
