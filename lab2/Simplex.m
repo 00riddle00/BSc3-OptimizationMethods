@@ -3,18 +3,7 @@ function Simplex
 % Daugiklis 1/8 ignoruojamas, kadangi neturi itakos rezultatui
 f=@(X) (X(1).^2).*X(2) + X(1).*(X(2).^2) - X(1).*X(2);
 
-disp('--------------------');
-f([1/4,1/2])
-f([1/8,1/5])
-disp('---------min--------');
-f([1/3,1/3])
-disp('---------min--------');
-f([1/3,1/4])
-f([1/2,1/3])
-disp('--------------------');
-disp(' ');
-
-% pradiniai artinai
+% pradiniai artiniai
 X_0=[0,0];
 X_1=[1,1];
 X_m=[4/10, 7/10];
@@ -22,11 +11,6 @@ X_n=[1/2,1/2];
 
 % pasirenkamas pradinis artinys
 X0 = X_1;
-
-disp('---------f at X0--------');
-f([1,1])
-disp('--------------------');
-disp(' ');
 
 % pasirenkami parametrai
 gamma=2;
@@ -37,7 +21,7 @@ teta=1;
 epsilon=10^(-4); %tikslumas
 
 %Pradinio simplekso sudarymas
-alpha=1;%1/2;
+alpha=1/2;
 n=2;
 delta1=alpha*(sqrt(n+1)+n-1)/(n*sqrt(2));
 delta2=alpha*(sqrt(n+1)-1)/(n*sqrt(2));
@@ -45,54 +29,30 @@ delta2=alpha*(sqrt(n+1)-1)/(n*sqrt(2));
 X1=[X0(1,1)+delta2,X0(1,2)+delta1];
 X2=[X0(1,1)+delta1,X0(1,2)+delta2];
 
-disp('---------X1-2--------');
-X1
-X2
-disp('--------------------');
-disp(' ');
-
 y0=f(X0);
 y1=f(X1);
 y2=f(X2);
 
-disp('--------Y0-2--------');
-y0
-y1
-y2
-disp('--------------------');
-disp(' ');
-
-% /////32/////
 y=[y0,y1,y2];
 X=[X0;X1;X2];
 
-%fprintf("debug0: %f %f %f", X, y);
-
-%fprintf("debug1");
-%X
-%y
-
-
-% //////36/////
 % Pradinio simplekso braizymas:
 deltax=[X0(1),X0(1),X1(1);X1(1),X2(1),X2(1)];
 deltay=[X0(2),X0(2),X1(2);X1(2),X2(2),X2(2)];
-%plot(deltax,deltay,'b');
-%grid on;
-%hold on;
-%plot(X(:,1),X(:,2),'mo');
-%hold on;
+plot(deltax,deltay,'b');
+grid on;
+hold on;
+plot(X(:,1),X(:,2),'mo');
+hold on;
 
 k=1; % iteraciju skaitliukas
 i=3; % funkcijos kvietimu skaiciaus skaitliukas
 kmax=100; % maksimalus iteraciju skaicius
 imax=100; % maksimalus funkcijos kvietimu skaicius
 
-norma=Inf;
-format short
+format short;
 
 % Metodo realizavimas
-
 disp(['   x1   x2    f(x1,x2)    k    (f kv. sk.)']);
 disp('-----------------------------------------------');
 
@@ -231,8 +191,8 @@ pabaigti=false;
     % Simplekso braizymas:
     deltax=[Xl(1),Xl(1),Xg(1);Xg(1),Xnew(1),Xnew(1)];
     deltay=[Xl(2),Xl(2),Xg(2);Xg(2),Xnew(2),Xnew(2)];
-    %plot(deltax,deltay,'b');
-    %hold on;
-    %plot(X(:,1),X(:,2),'mo');
-    %hold on;
+    plot(deltax,deltay,'b');
+    hold on;
+    plot(X(:,1),X(:,2),'mo');
+    hold on;
   end  
