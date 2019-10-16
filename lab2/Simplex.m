@@ -4,21 +4,21 @@ function Simplex
 f=@(X) (X(1).^2).*X(2) + X(1).*(X(2).^2) - X(1).*X(2);
 
 % pradiniai artinai
-X_0=[0,0]
-X_1=[1,1]
-X_m=[4/10, 7/10]
+X_0=[0,0];
+X_1=[1,1];
+X_m=[4/10, 7/10];
 X_n=[1/2,1/2];
 
 % pasirenkamas pradinis artinys
-X0 = X_n
+X0 = X_n;
 
 %Funkcijos grafiko y=f(x1,x2) braizymas
-subplot(1,2,1)
-[X(1),X(2)] = meshgrid(0:0.01:1, 0:0.01:1);
-y = f(X)
-surf(X(1),X(2), y);
-title(['Funkcijos y=f(X) grafikas'])
-% plot()
+%subplot(1,2,1)
+%[X(1),X(2)] = meshgrid(0:0.01:1, 0:0.01:1);
+%y = f(X);
+%surf(X(1),X(2), y);
+%title(['Funkcijos y=f(X) grafikas'])
+%%%% plot()
 
 % pasirenkami parametrai
 gamma=2;
@@ -30,7 +30,7 @@ epsilon=10^(-4); %tikslumas
 
 k=1; %iteraciju skaitliukas
 kmax=100; % maksimalus iteraciju skaicius
-imax=100 % maksimalus funkcijos kvietimu skaicius
+imax=100; % maksimalus funkcijos kvietimu skaicius
 
 %Pradinio simplekso sudarymas
 alpha=1/2;
@@ -38,19 +38,23 @@ n=2;
 delta1=alpha*(sqrt(n+1)+n-1)/(n*sqrt(2));
 delta2=alpha*(sqrt(n+1)-1)/(n*sqrt(2));
 
-X1=[XO(1)+delta2,X0(2)+delta1];
+X1=[X0(1)+delta2,X0(2)+delta1];
 X2=[X0(1)+delta1,X0(2)+delta2];
 
 y0=f(X0);
 y1=f(X1);
 y2=f(X2);
 
+y=[y0,y1,y2];
+X=[X0;X1;X2];
+
+X
 % /////32/////
 
 
 % //////36/////
 % Pradinio simplekso braizymas:
-deltax=[X0(1),X0(1),X1(1);X1(1),X2(1),X(1)];
+deltax=[X0(1),X0(1),X1(1);X1(1),X2(1),X2(1)];
 deltay=[X0(2),X0(2),X1(2);X1(2),X2(2),X2(2)];
 plot(deltax,deltay,'m')
 grid on
@@ -74,6 +78,10 @@ pabaigti=false;
     % Randami Xh, Xg, X1 ir funkcijos reiksmes siuose taskuose yh, yg, y1
     [~, nr]=sort(y); % y0, y1, y2 reiksmes isdestomos didejimo tvarka; nr rodys ju numerius ma....
 
+    % [B,I] = sort(___) also returns a collection of index vectors for any of the previous syntaxes. 
+    % I is the same size as A and describes the arrangement of the elements of A into B along the sorted
+    % dimension. For example, if A is a vector, then B = A(I).
+    
     y1=y(nr(1)); % maziausia y reiksme
     X1=X(nr(1),:);
 
@@ -175,3 +183,4 @@ pabaigti=false;
     hold on
     % plot(X(:,1),X(:,2),'mo'); % Atkomentuoti, jei norima pavaizduoti bandymo taskus rutuliukais...
     % hold on
+  end  
