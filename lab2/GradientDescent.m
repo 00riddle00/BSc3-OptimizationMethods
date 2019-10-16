@@ -20,7 +20,6 @@ subplot(1,2,1);
 y = f(x1, x2);
 surf(x1, x2, y);
 title(['Funkcijos y=f(x1,x2) grafikas']);
-% plot()
 
 % pasirenkamas parametras
 gamma = 0.33;

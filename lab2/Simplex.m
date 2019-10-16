@@ -48,7 +48,6 @@ y2=f(X2);
 y=[y0,y1,y2];
 X=[X0;X1;X2];
 
-X
 % /////32/////
 
 
@@ -56,7 +55,8 @@ X
 % Pradinio simplekso braizymas:
 deltax=[X0(1),X0(1),X1(1);X1(1),X2(1),X2(1)];
 deltay=[X0(2),X0(2),X1(2);X1(2),X2(2),X2(2)];
-plot(deltax,deltay,'m')
+plot(deltax,deltay,'b')
+plot(X(:,1),X(:,2),'mo');
 grid on
 hold on
 % plot(X(:,1),X(:,2),'mo'); % Atkomentuoti, jei norima pavaizduoti bandymo taskus rutuliukais...
@@ -75,15 +75,15 @@ disp('-----------------------------------------------');
 
 pabaigti=false;
   while ~pabaigti
-    % Randami Xh, Xg, X1 ir funkcijos reiksmes siuose taskuose yh, yg, y1
+    % Randami Xh, Xg, Xl ir funkcijos reiksmes siuose taskuose yh, yg, yl
     [~, nr]=sort(y); % y0, y1, y2 reiksmes isdestomos didejimo tvarka; nr rodys ju numerius ma....
 
     % [B,I] = sort(___) also returns a collection of index vectors for any of the previous syntaxes. 
     % I is the same size as A and describes the arrangement of the elements of A into B along the sorted
     % dimension. For example, if A is a vector, then B = A(I).
     
-    y1=y(nr(1)); % maziausia y reiksme
-    X1=X(nr(1),:);
+    yl=y(nr(1)); % maziausia y reiksme
+    Xl=X(nr(1),:);
 
     yh=y(nr(n+1)); % didziausia y reiksme  
     Xh=X(nr(n+1)); 
@@ -92,7 +92,7 @@ pabaigti=false;
     Xg=X(nr(n),:);
 
     % Viduriu tasko Xc ir naujo artinio Xnew apskaiciavimas
-    Xc=(Xg+X1)/2;
+    Xc=(Xg+Xl)/2;
     Xnew=Xh+(1+teta)*(Xc-Xh);
     ynew=f(Xnew);
     i=i+1;
@@ -108,9 +108,9 @@ pabaigti=false;
 
     % Naujo simplekso sudarymas
 
-    if (y1<ynew) && (ynew<yg)
+    if (yl<ynew) && (ynew<yg)
         teta=1;
-    elseif ynew<y1
+    elseif ynew<yl
       teta=gamma;
       Z=Xh+(1+teta)*(Xc-Xh);
       yz=f(Z);
@@ -145,7 +145,7 @@ pabaigti=false;
 
     count=0;
 
-    if max([norm(X1-Xg),norm(X1-Xh),norm(Xg-Xh)])<epsilon
+    if max([norm(Xl-Xg),norm(Xl-Xh),norm(Xg-Xh)])<epsilon
         disp(['Simpleksas tapo mazas (krastiniu ilgiai mazesni uz epsilon=', num2str(epsilon)]);
         % disp(['Simpleksas tapo mazas (krastiniu ilgiai mazesni uz epsilon=', num2str(epsilon),....
         count=count+1;
@@ -172,15 +172,22 @@ pabaigti=false;
           end
     end
     %if k==kmax  <---???
+    
+    if k==kmax
+      format short;
+      disp(['Pasiektas maksimalus iteraciju skaicius k=', num2str(kmax)]);
+      break
+    end     
+      
     k=k+1;
-    y=[y1,yg,ynew];
-    X=[X1;Xg;Xnew];
+    y=[yl,yg,ynew];
+    X=[Xl;Xg;Xnew];
    
     % Simplekso braizymas:
-    deltax=[X1(1),X1(1),Xg(1);Xg(1),Xnew(1),Xnew(1)];
-    deltay=[X1(2),X1(2),Xg(2);Xg(2),Xnew(2),Xnew(2)];
-    plot(deltax,deltay,'m')
+    deltax=[Xl(1),Xl(1),Xg(1);Xg(1),Xnew(1),Xnew(1)];
+    deltay=[Xl(2),Xl(2),Xg(2);Xg(2),Xnew(2),Xnew(2)];
+    plot(deltax,deltay,'b')
     hold on
-    % plot(X(:,1),X(:,2),'mo'); % Atkomentuoti, jei norima pavaizduoti bandymo taskus rutuliukais...
-    % hold on
+    plot(X(:,1),X(:,2),'mo');
+    hold on
   end  
