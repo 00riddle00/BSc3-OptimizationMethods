@@ -131,24 +131,28 @@ goal=false;
     count=0;
 
     if max([norm(Xl-Xg),norm(Xl-Xh),norm(Xg-Xh)])<epsilon
-        disp(['Simpleksas tapo mazas (krastiniu ilgiai mazesni uz epsilon=', num2str(epsilon)]);
+        disp(' ')
+        disp(['Simpleksas tapo mazas (krastiniu ilgiai mazesni uz epsilon=', num2str(epsilon), ')']);
         count=count+1;
     endif
 
     if max([abs(yl-yg),abs(yl-yh),abs(yg-yh)])<epsilon
-        disp(['Funkcijos reiksmes simplekso virsunese panasios (tikslumu epsilon=', num2str(epsilon)]);
+        disp(' ')
+        disp(['Funkcijos reiksmes simplekso virsunese panasios (tikslumu epsilon=', num2str(epsilon), ')']);
         count=count+1;
     endif
-
+    
     if i>=imax
         count=count+1;
           if count==3
             disp(' ');
             disp('Patenkinamos sustojimo salygos. Skaiciavimai baigiami, nes:');
-            disp(['1) simpleksas tapo mazas (krastiniu ilgiai mazesni uz epsilon=', num2str(epsilon)]);
-            disp(['2) funkcijos reiksmes simplekso virsunes panasios (tikslumu epsilon=', num2str(epsilon)]);
-            disp(['3) pasiektas maksimalus funkciju kvietimu skaicius=', num2str(imax)]);
+            disp(['1) simpleksas tapo mazas (krastiniu ilgiai mazesni uz epsilon=', num2str(epsilon), ')']);
+            disp(['2) funkcijos reiksmes simplekso virsunes panasios (tikslumu epsilon=', num2str(epsilon), ')']);
+            disp(['3) pasiektas maksimalus funkciju kvietimu skaicius=', num2str(imax), ')']);
             goal=true;
+           else
+            disp(['Pasiektas maksimalus iteraciju skaicius i=', num2str(imax)]);
           endif
     endif
  
@@ -159,7 +163,6 @@ goal=false;
     endif
       
     k=k+1;
-    disp(' ');
     y=[yl,yg,ynew];
     X=[Xl;Xg;Xnew];
    
@@ -170,4 +173,10 @@ goal=false;
     hold on;
     plot(X(:,1),X(:,2),'mo');
     hold on;
-  endwhile
+    
+    % used for pretty output
+    if ~count
+      disp(' ');
+    endif
+    
+ endwhile
