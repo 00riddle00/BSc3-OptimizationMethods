@@ -38,16 +38,18 @@ n=2;
 delta1=alpha*(sqrt(n+1)+n-1)/(n*sqrt(2));
 delta2=alpha*(sqrt(n+1)-1)/(n*sqrt(2));
 
-X1=[XO(1,1)+delta2,X0(1,2)+delta1];
-X2=[X0(1,1)+delta1,X0(1,2)+delta2];
+X1=[XO(1)+delta2,X0(2)+delta1];
+X2=[X0(1)+delta1,X0(2)+delta2];
 
 y0=f(X0);
 y1=f(X1);
 y2=f(X2);
-% /////31/////
+
+% /////32/////
 
 
-% /////36/////
+% //////36/////
+% Pradinio simplekso braizymas:
 deltax=[X0(1),X0(1),X1(1);X1(1),X2(1),X(1)];
 deltay=[X0(2),X0(2),X1(2);X1(2),X2(2),X2(2)];
 plot(deltax,deltay,'m')
@@ -162,7 +164,7 @@ pabaigti=false;
     k=k+1;
     y=[y1,yg,ynew];
     X=[X1;Xg;Xnew];
-
+   
     % Simplekso braizymas:
     deltax=[X1(1),X1(1),Xg(1);Xg(1),Xnew(1),Xnew(1)];
     deltay=[X1(2),X1(2),Xg(2);Xg(2),Xnew(2),Xnew(2)];
