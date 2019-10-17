@@ -12,8 +12,8 @@ X_n = [1 / 2, 1 / 2];
 X0 = X_0;
 
 % pasirenkami parametrai
-alpha = 1 / 2; % reguliuoja pradinio simplekso krastines ilgi
-teta = 1; % reguliuoja tieses lygti, breziamos per vidurio taska, ieskant naujos virsunes
+alpha = 1/2; % reguliuoja pradinio simplekso krastines ilgi
+teta = 0.4; % reguliuoja tieses lygti, breziamos per vidurio taska, ieskant naujos virsunes
 % simplekso deformavimo koeficientai
 gamma = 2; % reguliuoja simplekso ispletima, gamma > 1
 beta = 0.5; % reguliuoja simplekso suspaudima, 0 < beta < 1
@@ -146,6 +146,7 @@ while ~ goal
  
     if i >= imax
         count = count + 1;
+        disp(['Pasiektas maksimalus funkciju kvietimu skaicius i=', num2str(imax)]);
         if count == 3
             disp(' ');
             disp('Patenkinamos sustojimo salygos. Skaiciavimai baigiami, nes:');
@@ -153,8 +154,6 @@ while ~ goal
             disp(['2) funkcijos reiksmes simplekso virsunes panasios (tikslumu epsilon=', num2str(epsilon), ')']);
             disp(['3) pasiektas maksimalus funkciju kvietimu skaicius=', num2str(imax), ')']);
             goal = true;
-        else
-            disp(['Pasiektas maksimalus iteraciju skaicius i=', num2str(imax)]);
         endif
     endif
  
