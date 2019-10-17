@@ -12,9 +12,9 @@ X0 = X_0;
 
 % pasirenkami parametrai
 alpha = 1/2; % reguliuoja pradinio simplekso krastines ilgi
-teta = 0.4; % reguliuoja tieses lygti, breziamos per vidurio taska, ieskant naujos virsunes
+teta = 1; % reguliuoja tieses lygti, breziamos per vidurio taska, ieskant naujos virsunes
 % simplekso deformavimo koeficientai
-gamma = 2; % reguliuoja simplekso ispletima, gamma > 1
+gamma = 1.6; % reguliuoja simplekso ispletima, gamma > 1
 beta = 0.5; % reguliuoja simplekso suspaudima, 0 < beta < 1
 eta = - 0.5; % reguliuoja simplekso suspaudima, -1 < eta < 0
 
@@ -43,11 +43,11 @@ y = [y0, y1, y2];
 % Pradinio simplekso braizymas:
 deltax = [X0(1), X0(1), X1(1); X1(1), X2(1), X2(1)];
 deltay = [X0(2), X0(2), X1(2); X1(2), X2(2), X2(2)];
-%plot(deltax, deltay, 'b');
-%grid on;
-%hold on;
-%plot(X(:, 1), X(:, 2), 'mo'); % atvaizduoja bandymo taskus rutuliukais
-%hold on;
+plot(deltax, deltay, 'b');
+grid on;
+hold on;
+plot(X(:, 1), X(:, 2), 'mo'); % atvaizduoja bandymo taskus rutuliukais
+hold on;
 
 k = 1; % iteraciju skaitliukas (pradinio simplekso sudarymas = 1 iteracija)
 i = 3; % funkcijos kvietimu skaiciaus skaitliukas
@@ -117,29 +117,29 @@ while ~ goal
     endif
  
     if Xnew(1) <= 0 || Xnew(2) <= 0
-        %disp('Neigiama artinio koordinate! Keiciame krypti.');
+        disp('Neigiama artinio koordinate! Keiciame krypti.');
         teta = - 1 / 2;
         Xnew = Xh + (1 + teta) * (Xc - Xh);
         ynew = f(Xnew);
         i = i + 1;
     endif
  
-     %fprintf('%f    %f   %f %d   %d', Xnew, ynew, k, i);
+     fprintf('%f    %f   %f %d   %d', Xnew, ynew, k, i);
  
     count = 0;
  
     if max([norm(Xl - Xg), norm(Xl - Xh), norm(Xg - Xh)]) < epsilon
-        %disp(' ')
-        %disp(['Simpleksas tapo mazas (krastiniu ilgiai mazesni uz epsilon=', num2str(epsilon), ')']);
+        disp(' ')
+        disp(['Simpleksas tapo mazas (krastiniu ilgiai mazesni uz epsilon=', num2str(epsilon), ')']);
         count = count + 1;
     endif
  
     if max([abs(yl - yg), abs(yl - yh), abs(yg - yh)]) < epsilon
         % used for pretty output
         if ~count
-          %disp(' ')
+          disp(' ')
         endif  
-        %disp(['Funkcijos reiksmes simplekso virsunese panasios (tikslumu epsilon=', num2str(epsilon), ')']);
+        disp(['Funkcijos reiksmes simplekso virsunese panasios (tikslumu epsilon=', num2str(epsilon), ')']);
         count = count + 1;
     endif
  
@@ -147,7 +147,6 @@ while ~ goal
         count = count + 1;
         disp(['Pasiektas maksimalus funkciju kvietimu skaicius i=', num2str(imax)]);
         if count == 3
-            fprintf('%f    %f   %f %d   %d', Xnew, ynew, k, i);
             disp(' ');
             disp('Patenkinamos sustojimo salygos. Skaiciavimai baigiami, nes:');
             disp(['1) simpleksas tapo mazas (krastiniu ilgiai mazesni uz epsilon=', num2str(epsilon), ')']);
@@ -173,10 +172,10 @@ while ~ goal
     % Simplekso braizymas:
     deltax = [Xl(1), Xl(1), Xg(1); Xg(1), Xnew(1), Xnew(1)];
     deltay = [Xl(2), Xl(2), Xg(2); Xg(2), Xnew(2), Xnew(2)];
-    %plot(deltax, deltay, 'b');
-    %hold on;
-    %plot(X(:, 1), X(:, 2), 'mo');
-    %hold on;
+    plot(deltax, deltay, 'b');
+    hold on;
+    plot(X(:, 1), X(:, 2), 'mo');
+    hold on;
  
     % used for pretty output
     if ~ count

@@ -9,7 +9,6 @@ gradf = @(X) [2 * X(1) * X(2) + X(2) .^ 2 - X(2), X(1) ^ 2 + 2 * X(1) * X(2) - X
 X_0 = [0, 0];
 X_1 = [1, 1];
 X_m = [4 / 10, 7 / 10];
-X_n = [1 / 2, 1 / 2];
 
 % pasirenkamas pradinis artinys
 X0 = X_1;
@@ -62,4 +61,3 @@ while norma >= epsilon
 endwhile
 grid on;
 hold off;
-endprogram
