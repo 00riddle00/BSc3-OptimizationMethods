@@ -1,4 +1,4 @@
-function Simplex
+function Simplex_test
 
 f = @(X) (1 / 8) * ((X(1) .^ 2) .* X(2) + X(1) .* (X(2) .^ 2) - X(1) .* X(2));
 
@@ -13,9 +13,10 @@ X0 = X_0;
 
 % pasirenkami parametrai
 alpha = 1/2; % reguliuoja pradinio simplekso krastines ilgi
-teta = 0.4; % reguliuoja tieses lygti, breziamos per vidurio taska, ieskant naujos virsunes
+teta = 1; % reguliuoja tieses lygti, breziamos per vidurio taska, ieskant naujos virsunes
+disp(teta);
 % simplekso deformavimo koeficientai
-gamma = 2; % reguliuoja simplekso ispletima, gamma > 1
+gamma = 1.6; % reguliuoja simplekso ispletima, gamma > 1
 beta = 0.5; % reguliuoja simplekso suspaudima, 0 < beta < 1
 eta = - 0.5; % reguliuoja simplekso suspaudima, -1 < eta < 0
 
@@ -146,7 +147,7 @@ while ~ goal
  
     if i >= imax
         count = count + 1;
-        disp(['Pasiektas maksimalus funkciju kvietimu skaicius i=', num2str(imax)]);
+        %disp(['Pasiektas maksimalus funkciju kvietimu skaicius i=', num2str(imax)]);
         if count == 3
             fprintf('%f    %f   %f %d   %d', Xnew, ynew, k, i);
             disp(' ');
