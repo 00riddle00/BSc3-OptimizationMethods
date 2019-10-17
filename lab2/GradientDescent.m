@@ -21,8 +21,10 @@ y = f(x1, x2);
 surf(x1, x2, y);
 title(['Funkcijos y=f(x1,x2) grafikas']);
 
-% pasirenkamas parametras
-gamma = 0.33;
+% pasirenkamas iteracijos parametras (kokio ilgio zingsnis atliekamas gradiento kryptimi)
+% gamma reziai: (0;2/L), kur L - Lipsico konstanta.
+% Testuosime 0 < gamma < 2
+gamma = 0.33; % 
 
 epsilon = 10 ^ (- 4); % tikslumas
 

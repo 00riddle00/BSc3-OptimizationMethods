@@ -12,15 +12,16 @@ X_n = [1 / 2, 1 / 2];
 X0 = X_0;
 
 % pasirenkami parametrai
-gamma = 2;
-beta = 0.5;
-eta = - 0.5;
-teta = 1;
+alpha = 1 / 2; % reguliuoja pradinio simplekso krastines ilgi
+teta = 1; % reguliuoja tieses lygti, breziamos per vidurio taska, ieskant naujos virsunes
+% simplekso deformavimo koeficientai
+gamma = 2; % reguliuoja simplekso ispletima, gamma > 1
+beta = 0.5; % reguliuoja simplekso suspaudima, 0 < beta < 1
+eta = - 0.5; % reguliuoja simplekso suspaudima, -1 < eta < 0
 
 epsilon = 10 ^ (- 4); % tikslumas
 
 % Pradinio simplekso sudarymas
-alpha = 1 / 2; % reguliuoja simplekso krastines ilgi
 n = 2; % keliu kintamuju funkcija yra minimizuojama
 delta1 = alpha * (sqrt(n + 1) + n - 1) / (n * sqrt(2));
 delta2 = alpha * (sqrt(n + 1) - 1) / (n * sqrt(2));
