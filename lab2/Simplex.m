@@ -9,7 +9,7 @@ X_m = [4 / 10, 7 / 10];
 X_n = [1 / 2, 1 / 2];
 
 % pasirenkamas pradinis artinys
-X0 = X_1;
+X0 = X_0;
 
 % pasirenkami parametrai
 gamma = 2;
@@ -135,7 +135,10 @@ while ~ goal
     endif
  
     if max([abs(yl - yg), abs(yl - yh), abs(yg - yh)]) < epsilon
-        disp(' ')
+        % used for pretty output
+        if ~count
+          disp(' ')
+        endif  
         disp(['Funkcijos reiksmes simplekso virsunese panasios (tikslumu epsilon=', num2str(epsilon), ')']);
         count = count + 1;
     endif
