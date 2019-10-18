@@ -30,7 +30,7 @@ norma = Inf;
 while norma >= epsilon
  
     grad = gradf(X0);
-    res=AuksinisPjuvis(f,X0,grad);
+    res=GoldenSection(f,X0,grad);
     gamma=res(1,1)
     X0 = X0 - gamma .* grad; % naujas artinys
     norma = norm(grad);
