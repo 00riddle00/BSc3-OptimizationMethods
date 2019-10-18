@@ -6,7 +6,7 @@ epsilon=10^(-6);
 
 % X0=[0,0];      %X0
 %X0=[1,1];      %X1
-%X0=[0.5, 0.4]; %Xm
+X0=[0.5, 0.4]; %Xm
 
 subplot(1,2,1);
 [x1,x2] = meshgrid(0:0.01:0.8, 0:0.01:0.8);
@@ -23,9 +23,9 @@ format short
 
 while gradnorma>=epsilon
       grad=gradf(X0(1,1),X0(1,2));
-      ats=AuksinisPjuvis(f,X0,grad);
-      gamma=ats(1,1);
-      i=i+ats(1,2)+1;
+      res=AuksinisPjuvis(f,X0,grad);
+      gamma=res(1,1);
+      i=i+res(1,2)+1;
       X1=X0-gamma*grad;
       
       disp([X1(1,1), X1(1,2), f(X1(1,1), X1(1,2)), k, i]);

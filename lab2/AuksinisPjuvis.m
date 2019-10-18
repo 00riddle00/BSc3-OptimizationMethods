@@ -1,4 +1,4 @@
-function ats=AuksinisPjuvis(f, X0, grad)
+function res=AuksinisPjuvis(f, X0, grad)
 
 f1=@(x) f(X0(1,1)-x.*grad(1,1), X0(1,2)-x.*grad(1,2));
 l=0;   % apatinis intervalo rezis
@@ -38,5 +38,5 @@ while L>= epsilon
       end 
       k=k+1;
 end
-ats=[x1, k+2];
+res=[x1, k+2];
 end
