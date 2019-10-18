@@ -8,10 +8,6 @@ epsilon=10^(-6);
 %X0=[1,1];      %X1
 X0=[0.5, 0.4]; %Xm
 
-subplot(1,2,1);
-[x1,x2] = meshgrid(0:0.01:0.8, 0:0.01:0.8);
-y=f(x1,x2);
-surf(x1, x2, y);
 i=0;
 k=1; %iteraciju skaitliukas
 kmax=100; % maksimalus iteraciju skaitliukas
@@ -29,10 +25,7 @@ while gradnorma>=epsilon
       X1=X0-gamma*grad;
       
       disp([X1(1,1), X1(1,2), f(X1(1,1), X1(1,2)), k, i]);
-      subplot(1,2,2);
-      plot(X1(1,1), X1(1,2) , 'o')
-      grid on
-      hold on
+
       if k==kmax
           disp(['Pasiektas maksimalus iteraciju skaicius k=', num2str(kmax)]);
           break
