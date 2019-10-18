@@ -24,12 +24,12 @@ while gradnorma>=epsilon
       i=i+res(1,2)+1;
       X1=X0-gamma*grad;
       
-      disp([X1(1,1), X1(1,2), f(X1(1,1), X1(1,2)), k, i]);
+      disp([X1(1), X1(2), f(X1(1), X1(2)), k, i]);
 
       if k==kmax
           disp(['Pasiektas maksimalus iteraciju skaicius k=', num2str(kmax)]);
           break
-      end 
+      end
       k=k+1;
       gradnorma=norm(grad);
       X0=X1;
