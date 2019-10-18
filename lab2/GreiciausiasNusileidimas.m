@@ -1,22 +1,32 @@
 function GreiciausiasNusileidimas
 
-f=@(X)(X(1)^2.*X(2)+X(1)*X(2)^2-X(1)*X(2))/8;
+f=@(X) (1 / 8) * (X(1)^2.*X(2)+X(1)*X(2)^2-X(1)*X(2));
+% ieskome min(f(X))
+
 gradf = @(X) [2 * X(1) * X(2) + X(2) .^ 2 - X(2), X(1) ^ 2 + 2 * X(1) * X(2) - X(1)];
 
-epsilon=10^(-6);
+% pradiniai artiniai
+X_0 = [0, 0];
+X_1 = [1, 1];
+X_m = [4 / 10, 7 / 10];
+X_n = [0.5, 0.4]; 
 
-% X0=[0,0];      %X0
-%X0=[1,1];      %X1
-X0=[0.5, 0.4]; %Xm
+% pasirenkamas pradinis artinys
+X0 = X_n;
 
-i=0;
+epsilon = 10 ^ (- 4); % tikslumas
+
+i=0; % funckijos kvietimu skaicius
 k=1; %iteraciju skaitliukas
 kmax=100; % maksimalus iteraciju skaitliukas
 
-disp(['    x1        x2       f(x1,x2)   k         funkc. kviet. sk']);
+% Metodo realizavimas
 
-gradnorma=Inf;
-format short
+disp(['x1       x2       f(x1,x2)  k (funkc. kviet. sk)']);
+
+format short;
+
+gradnorma = Inf;
 
 while gradnorma>=epsilon
       grad=gradf(X0);
