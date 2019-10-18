@@ -1,6 +1,6 @@
 function res=AuksinisPjuvis(f, X0, grad)
 
-f1=@(x) f(X0-x.*grad);
+f1=@(x) f(X0-x*grad);
 l=0;   % apatinis intervalo rezis
 r=5;  % desinysis intervalo rezis
 

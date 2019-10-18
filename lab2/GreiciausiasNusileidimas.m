@@ -1,7 +1,8 @@
 function GreiciausiasNusileidimas
 
-f=@(X)(X(1).^2.*X(2)+X(1).*X(2).^2-X(1).*X(2))/8;
-gradf=@(m1, m2)[2*m1.*m2+m2.^2-m2, 2*m1.*m2+m1.^2-m1];
+f=@(X)(X(1)^2.*X(2)+X(1)*X(2)^2-X(1)*X(2))/8;
+gradf = @(X) [2 * X(1) * X(2) + X(2) .^ 2 - X(2), X(1) ^ 2 + 2 * X(1) * X(2) - X(1)];
+
 epsilon=10^(-6);
 
 % X0=[0,0];      %X0
@@ -18,7 +19,7 @@ gradnorma=Inf;
 format short
 
 while gradnorma>=epsilon
-      grad=gradf(X0(1),X0(2));
+      grad=gradf(X0);
       res=AuksinisPjuvis(f,X0,grad);
       gamma=res(1);
       i=i+res(2)+1;
