@@ -1,4 +1,4 @@
-function GradientDescent
+function SteepestDescent
 
 f = @(x1, x2) (1 / 8) * ((x1 .^ 2) .* x2 + x1 .* (x2 .^ 2) - x1 .* x2);
 % ieskome min(f(x1, x2))
@@ -11,7 +11,7 @@ X_1 = [1, 1];
 X_m = [4 / 10, 7 / 10];
 
 % pasirenkamas pradinis artinys
-X0 = X_0;
+X0 = X_1;
 
 % Funkcijos grafiko y=f(x1,x2) braizymas
 subplot(1, 2, 1);
