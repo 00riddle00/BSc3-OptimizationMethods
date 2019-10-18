@@ -1,6 +1,6 @@
 function GreiciausiasNusileidimas
 
-f=@(x1, x2)(x1.^2.*x2+x1.*x2.^2-x1.*x2)/8;
+f=@(X)(X(1).^2.*X(2)+X(1).*X(2).^2-X(1).*X(2))/8;
 gradf=@(m1, m2)[2*m1.*m2+m2.^2-m2, 2*m1.*m2+m1.^2-m1];
 epsilon=10^(-6);
 
@@ -24,7 +24,7 @@ while gradnorma>=epsilon
       i=i+res(2)+1;
       X1=X0-gamma*grad;
       
-      disp([X1(1), X1(2), f(X1(1), X1(2)), k, i]);
+      disp([X1(1), X1(2), f(X0), k, i]);
 
       if k==kmax
           disp(['Pasiektas maksimalus iteraciju skaicius k=', num2str(kmax)]);
