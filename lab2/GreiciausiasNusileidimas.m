@@ -18,10 +18,10 @@ gradnorma=Inf;
 format short
 
 while gradnorma>=epsilon
-      grad=gradf(X0(1,1),X0(1,2));
+      grad=gradf(X0(1),X0(2));
       res=AuksinisPjuvis(f,X0,grad);
-      gamma=res(1,1);
-      i=i+res(1,2)+1;
+      gamma=res(1);
+      i=i+res(2)+1;
       X1=X0-gamma*grad;
       
       disp([X1(1), X1(2), f(X1(1), X1(2)), k, i]);
