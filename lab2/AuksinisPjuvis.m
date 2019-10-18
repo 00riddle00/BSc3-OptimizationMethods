@@ -44,7 +44,7 @@ while L>= epsilon
           x1 = x2;
           y1=y2;
           x2 = l + gR*L;
-          y2 = f(x2);
+          y2 = f1(x2);
       else
           r = x2;
           L = r - l;
