@@ -5,7 +5,7 @@ f1=@(x) f(X0-x*grad);
 % Auksinio pjuvio metodu randamas funkcijos f(x) minimumas intervale [l,r].
 
 l=0;   % apatinis intervalo rezis
-r=5;  % desinysis intervalo rezis
+r=3;  % virsutinis intervalo rezis
 
 epsilon=10^(-4); %tikslumas
 
