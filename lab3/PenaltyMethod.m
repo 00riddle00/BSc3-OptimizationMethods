@@ -47,24 +47,17 @@ disp('-----------------------------------------------');
 
 norma = Inf;
 
-fn = @(X) (1 / 8) * ((X(1) .^ 2) .* X(2) + X(1) .* (X(2) .^ 2) - X(1) .* X(2));
 
-res=Simplex(fn);
-
-%res=Simplex(fn,X0);
-
-disp(res);
-
-
-
-%while norma >= epsilon
+while norma >= epsilon
   
     % naujas artinys
-    %X1 = Simplex();
+    X1 = Simplex(B(X0,r));
+    norma = norm(X0-X1);
+    %!!!res=Simplex(fn,X0);
+    %!!! iter back
     
     % maziname r
-    %r = Fn_decrease_r(r);
+    r = Fn_decrease_r(r);
+    X0 = X1;
     
-    %X0 = X1;
-
-%endwhile
+endwhile
