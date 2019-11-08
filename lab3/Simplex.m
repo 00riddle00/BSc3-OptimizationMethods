@@ -62,7 +62,7 @@ disp('-----------------------------------------------');
 goal = false;
 while ~ goal
     % Randami Xh, Xg, Xl ir funkcijos reiksmes siuose taskuose yh, yg, yl
-    [~, nr] = sort(y); % y0, y1, y2 reiksmes isdestomos didejimo tvarka; nr rodys ju numerius masyve y
+    [~, nr] = sort(y); % y0, y1, y2, y3 reiksmes isdestomos didejimo tvarka; nr rodys ju numerius masyve y
  
     yl = y(nr(1)); % maziausia y reiksme
     Xl = X(nr(1), :);
@@ -72,9 +72,12 @@ while ~ goal
  
     yg = y(nr(n)); % antra pagal dydi y reiksme
     Xg = X(nr(n), :);
- 
+    
+    yi = y(nr(2)); % likusi vidurine reiksme
+    Xi = X(nr(2), :);
+    
     % Viduriu tasko Xc ir naujo artinio Xnew apskaiciavimas
-    Xc = (Xg + Xl) / 2;
+    Xc = (Xg + Xl + Xi) / 3;
  
     Xnew = Xh + (1 + teta) * (Xc - Xh);
     ynew = f(Xnew);
@@ -123,7 +126,7 @@ while ~ goal
         i = i + 1;
     endif
  
-     fprintf('%f    %f   %f %d   %d', Xnew, ynew, k, i);
+     fprintf('%f  %f  %f   %f   %d %d', Xnew, ynew, k, i);
  
     count = 0;
  
@@ -163,19 +166,10 @@ while ~ goal
  
     k = k + 1;
     % naujas artinys
-    X = [Xl; Xg; Xnew];
+    X = [Xl; Xi, Xg; Xnew];
     % funkcijos reiksmes naujame artinyje
-    y = [yl, yg, ynew];
+    y = [yl, yi, yg, ynew];
 
- 
-    % Simplekso braizymas:
-    deltax = [Xl(1), Xl(1), Xg(1); Xg(1), Xnew(1), Xnew(1)];
-    deltay = [Xl(2), Xl(2), Xg(2); Xg(2), Xnew(2), Xnew(2)];
-    plot(deltax, deltay, 'b');
-    hold on;
-    plot(X(:, 1), X(:, 2), 'mo');
-    hold on;
- 
     % used for pretty output
     if ~ count
         disp(' ');
