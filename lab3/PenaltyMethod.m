@@ -54,3 +54,17 @@ res=Simplex(fn);
 %res=Simplex(fn,X0);
 
 disp(res);
+
+
+
+%while norma >= epsilon
+  
+    % naujas artinys
+    %X1 = Simplex();
+    
+    % maziname r
+    %r = Fn_decrease_r(r);
+    
+    %X0 = X1;
+
+%endwhile

@@ -40,7 +40,7 @@ X3 = [X0(1, 1) + delta1, X0(1, 2) + delta1, X0(1, 3) + delta2];
 y0 = f(X0);
 y1 = f(X1);
 y2 = f(X2);
-y2 = f(X3);
+y3 = f(X3);
 
 % simplekso virsuniu masyvas
 X = [X0; X1; X2; X3];
@@ -130,13 +130,13 @@ while ~ goal
  
     count = 0;
  
-    if max([norm(Xl - Xg), norm(Xl - Xh), norm(Xg - Xh)]) < epsilon
+    if max([norm(Xl - Xi), norm(Xl - Xg), norm(Xl - Xh), norm(Xi - Xg), norm(Xi - Xh), norm(Xg - Xh)]) < epsilon
         disp(' ')
         disp(['Simpleksas tapo mazas (krastiniu ilgiai mazesni uz epsilon=', num2str(epsilon), ')']);
         count = count + 1;
     endif
  
-    if max([abs(yl - yg), abs(yl - yh), abs(yg - yh)]) < epsilon
+    if max([abs(yl - yi), abs(yl - yg), abs(yl - yh), abs(yi - yg), abs(yi - yh), abs(yg - yh)]) < epsilon
         % used for pretty output
         if ~count
           disp(' ')
@@ -166,7 +166,7 @@ while ~ goal
  
     k = k + 1;
     % naujas artinys
-    X = [Xl; Xi, Xg; Xnew];
+    X = [Xl; Xi; Xg; Xnew];
     % funkcijos reiksmes naujame artinyje
     y = [yl, yi, yg, ynew];
 
