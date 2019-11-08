@@ -49,4 +49,8 @@ norma = Inf;
 
 fn = @(X) (1 / 8) * ((X(1) .^ 2) .* X(2) + X(1) .* (X(2) .^ 2) - X(1) .* X(2));
 
-fn=Simplex(fn,X0);
+res=Simplex(fn);
+
+%res=Simplex(fn,X0);
+
+disp(res);
