@@ -1,20 +1,16 @@
 
-%function res=Simplex(f, X0)
 function res=Simplex(f)
 
-%f = @(X) -X(1) .* X(2) .* X(3);
-
 % pradiniai artiniai
-X_0 = [0, 0];
-X_1 = [1, 1];
-X_m = [4/10, 7/10];
-X_n = [1/2, 1/2];
+%X_0 = [0, 0];
+%X_1 = [1, 1];
+%X_m = [4/10, 7/10];
+%X_n = [1/2, 1/2];
 
-
-%X_0 = [0, 0, 0];
-%X_1 = [1, 1, 1];
-%X_m = [1/10, 4/10, 7/10];
-%X_n = [1/2, 1/2, 1/2];
+X_0 = [0, 0, 0];
+X_1 = [1, 1, 1];
+X_m = [1/10, 4/10, 7/10];
+X_n = [1/2, 1/2, 1/2];
 
 % pasirenkamas pradinis artinys
 X0 = X_n;
@@ -31,43 +27,36 @@ eta = - 0.5; % reguliuoja simplekso suspaudima, -1 < eta < 0
 epsilon = 10 ^ (- 4); 
 
 % Pradinio simplekso sudarymas
-n = 2; % keliu kintamuju funkcija yra minimizuojama
+n = 3; % keliu kintamuju funkcija yra minimizuojama
 delta1 = alpha * (sqrt(n + 1) + n - 1) / (n * sqrt(2));
 delta2 = alpha * (sqrt(n + 1) - 1) / (n * sqrt(2));
 
 % kitos simplekso virsunes (apskaiciuojame pagal teorine medziaga)
-X1 = [X0(1, 1) + delta2, X0(1, 2) + delta1];
-X2 = [X0(1, 1) + delta1, X0(1, 2) + delta2];
+X1 = [X0(1, 1) + delta2, X0(1, 2) + delta1, X0(1, 3) + delta1];
+X2 = [X0(1, 1) + delta1, X0(1, 2) + delta2, X0(1, 3) + delta1];
+X3 = [X0(1, 1) + delta1, X0(1, 2) + delta1, X0(1, 3) + delta2];
 
 % funkcijos reiksmes simplekso virsunese
 y0 = f(X0);
 y1 = f(X1);
 y2 = f(X2);
+y2 = f(X3);
 
 % simplekso virsuniu masyvas
-X = [X0; X1; X2];
+X = [X0; X1; X2; X3];
 
 % funkcijos reiksmiu simplekso virsunese masyvas
-y = [y0, y1, y2];
-
-% Pradinio simplekso braizymas:
-deltax = [X0(1), X0(1), X1(1); X1(1), X2(1), X2(1)];
-deltay = [X0(2), X0(2), X1(2); X1(2), X2(2), X2(2)];
-plot(deltax, deltay, 'b');
-grid on;
-hold on;
-plot(X(:, 1), X(:, 2), 'mo'); % atvaizduoja bandymo taskus rutuliukais
-hold on;
+y = [y0, y1, y2, y3];
 
 k = 1; % iteraciju skaitliukas (pradinio simplekso sudarymas = 1 iteracija)
-i = 3; % funkcijos kvietimu skaiciaus skaitliukas
+i = 4; % funkcijos kvietimu skaiciaus skaitliukas
 kmax = 100; % maksimalus iteraciju skaicius
 imax = 100; % maksimalus funkcijos kvietimu skaicius
 
 format short;
 
 % Metodo realizavimas
-disp(['   x1   x2    f(x1,x2)    k    (f kv. sk.)']);
+disp(['   x1   x2   x3   f(x1,x2,x3)    k    (f kv. sk.)']);
 disp('-----------------------------------------------');
 
 goal = false;
