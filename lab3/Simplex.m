@@ -1,5 +1,7 @@
 
-function res=Simplex(f)
+function res=Simplex(B,X0,r)
+  
+f = @(X) B(X,r);
 
 % pradiniai artiniai
 %X_0 = [0, 0];
@@ -7,13 +9,13 @@ function res=Simplex(f)
 %X_m = [4/10, 7/10];
 %X_n = [1/2, 1/2];
 
-X_0 = [0, 0, 0];
-X_1 = [1, 1, 1];
-X_m = [1/10, 4/10, 7/10];
-X_n = [1/2, 1/2, 1/2];
+%X_0 = [0, 0, 0];
+%X_1 = [1, 1, 1];
+%X_m = [1/10, 4/10, 7/10];
+%X_n = [1/2, 1/2, 1/2];
 
 % pasirenkamas pradinis artinys
-X0 = X_n;
+%X0 = X_n;
 
 % pasirenkami parametrai
 alpha = 0.5; % reguliuoja pradinio simplekso krastines ilgi
@@ -56,8 +58,6 @@ imax = 100; % maksimalus funkcijos kvietimu skaicius
 format short;
 
 % Metodo realizavimas
-disp(['   x1   x2   x3   f(x1,x2,x3)    k    (f kv. sk.)']);
-disp('-----------------------------------------------');
 
 goal = false;
 while ~ goal
@@ -82,15 +82,6 @@ while ~ goal
     Xnew = Xh + (1 + teta) * (Xc - Xh);
     ynew = f(Xnew);
     i = i + 1;
- 
-    % Jei bent viena neigiama koordinate, keiciame krypti
-    if Xnew(1) <= 0 || Xnew(2) <= 0
-        %disp('Neigiama artinio koordinate! Keiciame krypti.');
-        teta = - 1 / 2;
-        Xnew = Xh + (1 + teta) * (Xc - Xh);
-        ynew = f(Xnew);
-        i = i + 1;
-    endif
  
     % Naujo simplekso sudarymas
     if (yl < ynew) && (ynew < yg)
@@ -117,51 +108,24 @@ while ~ goal
         ynew = f(Z);
         i = i + 1;
     endif
- 
-    if Xnew(1) <= 0 || Xnew(2) <= 0
-        disp('Neigiama artinio koordinate! Keiciame krypti.');
-        teta = - 1 / 2;
-        Xnew = Xh + (1 + teta) * (Xc - Xh);
-        ynew = f(Xnew);
-        i = i + 1;
-    endif
- 
-     fprintf('%f  %f  %f   %f   %d %d', Xnew, ynew, k, i);
- 
+  
     count = 0;
  
     if max([norm(Xl - Xi), norm(Xl - Xg), norm(Xl - Xh), norm(Xi - Xg), norm(Xi - Xh), norm(Xg - Xh)]) < epsilon
-        disp(' ')
-        disp(['Simpleksas tapo mazas (krastiniu ilgiai mazesni uz epsilon=', num2str(epsilon), ')']);
         count = count + 1;
     endif
  
     if max([abs(yl - yi), abs(yl - yg), abs(yl - yh), abs(yi - yg), abs(yi - yh), abs(yg - yh)]) < epsilon
-        % used for pretty output
         if ~count
-          disp(' ')
         endif  
-        disp(['Funkcijos reiksmes simplekso virsunese panasios (tikslumu epsilon=', num2str(epsilon), ')']);
         count = count + 1;
     endif
  
     if i >= imax
         count = count + 1;
-        disp(['Pasiektas maksimalus funkciju kvietimu skaicius i=', num2str(imax)]);
         if count == 3
-            disp(' ');
-            disp('Patenkinamos sustojimo salygos. Skaiciavimai baigiami, nes:');
-            disp(['1) simpleksas tapo mazas (krastiniu ilgiai mazesni uz epsilon=', num2str(epsilon), ')']);
-            disp(['2) funkcijos reiksmes simplekso virsunes panasios (tikslumu epsilon=', num2str(epsilon), ')']);
-            disp(['3) pasiektas maksimalus funkciju kvietimu skaicius=', num2str(imax), ')']);
             goal = true;
         endif
-    endif
- 
-    if k == kmax
-        format short;
-        disp(['Pasiektas maksimalus iteraciju skaicius k=', num2str(kmax)]);
-        break
     endif
  
     k = k + 1;
@@ -170,14 +134,9 @@ while ~ goal
     % funkcijos reiksmes naujame artinyje
     y = [yl, yi, yg, ynew];
 
-    % used for pretty output
-    if ~ count
-        disp(' ');
-    endif
  
 endwhile
-res=ynew;
-
+res=[Xnew,i];
 endfunction
 
 
