@@ -3,20 +3,6 @@ function res=Simplex(B,X0,r)
   
 f = @(X) B(X,r);
 
-% pradiniai artiniai
-%X_0 = [0, 0];
-%X_1 = [1, 1];
-%X_m = [4/10, 7/10];
-%X_n = [1/2, 1/2];
-
-%X_0 = [0, 0, 0];
-%X_1 = [1, 1, 1];
-%X_m = [1/10, 4/10, 7/10];
-%X_n = [1/2, 1/2, 1/2];
-
-% pasirenkamas pradinis artinys
-%X0 = X_n;
-
 % pasirenkami parametrai
 alpha = 0.5; % reguliuoja pradinio simplekso krastines ilgi
 teta = 1.0; % reguliuoja tieses lygti, breziamos per vidurio taska, ieskant naujos virsunes
@@ -26,7 +12,7 @@ beta = 0.5; % reguliuoja simplekso suspaudima, 0 < beta < 1
 eta = - 0.5; % reguliuoja simplekso suspaudima, -1 < eta < 0
 
 % tikslumas
-epsilon = 10 ^ (- 4); 
+epsilon = 10 ^ (-4); 
 
 % Pradinio simplekso sudarymas
 n = 3; % keliu kintamuju funkcija yra minimizuojama

@@ -26,13 +26,13 @@ X_m = [1/10, 4/10, 7/10];
 
 % pasirenkamas pradinis artinys
 X_n = [1/2, 1/2, 1/2];
-X0 = X_n;
+X0 = X_0;
 
 % pasirenkamas pradinis baudos daugiklis
 r = 1;
 
 % tikslumas
-epsilon = 10 ^ (-5); 
+epsilon = 10 ^ (-4); 
 
 k = 1; % iteraciju skaitliukas (pradinio simplekso sudarymas = 1 iteracija)
 i = 0; % funkcijos kvietimu skaiciaus skaitliukas
@@ -65,5 +65,5 @@ while norma >= epsilon
     k = k+1;
     
 endwhile
-
+disp("pabaiga");
 endfunction
