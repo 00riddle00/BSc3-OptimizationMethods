@@ -25,8 +25,7 @@ X_1 = [1, 1, 1];
 X_m = [1/10, 4/10, 7/10];
 
 % pasirenkamas pradinis artinys
-X_n = [1/2, 1/2, 1/2];
-X0 = X_0;
+X0 = X_m;
 
 % pasirenkamas pradinis baudos daugiklis
 r = 1;
@@ -42,7 +41,7 @@ imax = 100; % maksimalus funkcijos kvietimu skaicius
 format short;
 
 % Metodo realizavimas
-disp(['   x1  x2  x3   f(X) B(x,r)   k    (f kv. sk.)']);
+disp(['   x1  x2  x3   f(X) B(X,r)   k    (f kv. sk.)']);
 disp('-----------------------------------------------');
 
 norma = Inf;
@@ -65,5 +64,5 @@ while norma >= epsilon
     k = k+1;
     
 endwhile
-disp("pabaiga");
+
 endfunction

@@ -12,7 +12,7 @@ beta = 0.5; % reguliuoja simplekso suspaudima, 0 < beta < 1
 eta = - 0.5; % reguliuoja simplekso suspaudima, -1 < eta < 0
 
 % tikslumas
-epsilon = 10 ^ (-4); 
+epsilon = 10 ^ (-6); 
 
 % Pradinio simplekso sudarymas
 n = 3; % keliu kintamuju funkcija yra minimizuojama

@@ -38,13 +38,13 @@ format long;
 
 norma = Inf;
 
-while norma >= epsilon
  
+while norma >= epsilon
     grad = gradf(X0);
     X0 = X0 - gamma .* grad; % naujas artinys
     norma = norm(grad);
  
-     fprintf('%f %f %f %d %d\n', X0, f(X0(1), X0(2)), k, k);
+    fprintf('%f %f %f %d %d\n', X0, f(X0(1), X0(2)), k, k);
  
     subplot(1, 2, 2);
     title(['Artiniai (pradinis taškas: X1)']);
