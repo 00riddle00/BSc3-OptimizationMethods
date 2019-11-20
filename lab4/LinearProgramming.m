@@ -31,7 +31,13 @@ lastCol = size(C,2);
 
 beta = [n+1, n+2, n+3];       
       
+
+
+while true 
+  
+disp('C=');
 disp(C);
+disp('beta=');
 disp(beta);
 
 % cl = lowest col number
@@ -47,11 +53,9 @@ lambda = [];
 for (row = 2:lastRow)
    lambda(end+1) = C(row,lastCol) / C(row, cl);
 end
-lambda
 
 lambda(lambda < 0) = NaN;
-lambda
-[min, k_ind] = (min(lambda));
+[m,k_ind] = (min(lambda));
 beta(k_ind) = cl;
 base_row = k_ind + 1;
 
@@ -63,19 +67,14 @@ for (row = 2:lastRow)
   if (el ~= 0)
     C(row, :) = C(row, :) ./ el;
     if (row ~= base_row)
-      C(row, :) = C(row, :) - C(base_row, :)
-      C
-      return
+      C(row, :) = C(row, :) - C(base_row, :);
     endif
   endif
 endfor
 
-C(0, :) = C(0, :) - C(base_row, :) .* lowest;
-C
-%disp(C);
-%disp(beta);
+C(1, :) = C(1, :) - C(base_row, :) .* lowest;
 
-
+endwhile
 
 
 
