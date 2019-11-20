@@ -13,9 +13,9 @@ ap_LHS = [-1  1 -1 -1
            2  4  0  0  
            0  0  1  1];
 % apribojimu desiniosios puses
-ap_RHS = [ 8
-          10
-           3 ];
+ap_RHS = [ 1
+           4
+           7 ];
 % =======================================================
 
 C = zeros(a_n+1,n+a_n+1);           
@@ -31,8 +31,6 @@ lastCol = size(C,2);
 
 beta = [n+1, n+2, n+3];       
       
-
-
 while true 
   
 disp('C=');
@@ -44,14 +42,13 @@ disp(beta);
 [lowest,cl] = min(C(1:1,1:n));
 
 if (lowest >= 0)
-   disp("STOP");
-   return
+   break
 endif
 
 lambda = [];
 
 for (row = 2:lastRow)
-   lambda(end+1) = C(row,lastCol) / C(row, cl);
+   lambda(end+1) = C(row,lastCol) ./ C(row, cl);
 end
 
 lambda(lambda < 0) = NaN;
@@ -73,10 +70,31 @@ for (row = 2:lastRow)
 endfor
 
 C(1, :) = C(1, :) - C(base_row, :) .* lowest;
-
 endwhile
 
+RES = [];
 
+for (col = 1:lastCol-1)
+  el = C(1,col);
+  if (el ~= 0)
+    RES(end+1) = 0;
+  else
+    k_x = find(beta==col);
+    C(k_x+1,cl);
+    RES(end+1) = C(k_x+1,lastCol);
+  endif
+endfor
+
+X = RES(1:n);
+S = RES(n+1:end);
+Fmin = -C(1,lastCol);
+
+disp("X=");
+disp(X);
+disp("S=");
+disp(S);
+disp("Fmin=");
+disp(Fmin);
 
 endfunction
 
