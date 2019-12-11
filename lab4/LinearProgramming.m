@@ -27,7 +27,7 @@ M(2:end,end) = ap_RHS;
 % last row
 lastRow = size(M,1);
 % last column
-lastMol = size(M,2);
+lastCol = size(M,2);
 
 beta = [n+1, n+2, n+3];       
       
@@ -50,7 +50,7 @@ endif
 lambda = [];
 
 for (row = 2:lastRow)
-   lambda(end+1) = M(row,lastMol) ./ M(row, cl);
+   lambda(end+1) = M(row,lastCol) ./ M(row, cl);
 end
 
 lambda(lambda < 0) = NaN;
@@ -74,22 +74,13 @@ endfor
 M(1, :) = M(1, :) - M(base_row, :) .* lowest;
 endwhile
 
-RES = [];
-
-for (col = 1:lastMol-1)
-  el = M(1,col);
-  if (el ~= 0)
-    RES(end+1) = 0;
-  else
-    k_x = find(beta==col);
-    M(k_x+1,cl);
-    RES(end+1) = M(k_x+1,lastMol);
-  endif
-endfor
+RES = [0,0,0,0,0,0,0];
+B=M(2:lastRow,lastCol)
+RES(beta) = B
 
 X = RES(1:n);
 S = RES(n+1:end);
-Fmin = -M(1,lastMol);
+Fmin = -M(1,lastCol);
 
 disp("X=");
 disp(X);
