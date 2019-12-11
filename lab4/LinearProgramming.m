@@ -18,28 +18,30 @@ ap_RHS = [ 1
            7 ];
 % =======================================================
 
-C = zeros(a_n+1,n+a_n+1);           
-C(1,1:n) = kint;
-C(2:end,1:n) = ap_LHS;
-C(2:end,n+1:n+a_n) = eye(a_n);
-C(2:end,end) = ap_RHS;
+M = zeros(a_n+1,n+a_n+1);           
+M(1,1:n) = kint;
+M(2:end,1:n) = ap_LHS;
+M(2:end,n+1:n+a_n) = eye(a_n);
+M(2:end,end) = ap_RHS;
 
 % last row
-lastRow = size(C,1);
+lastRow = size(M,1);
 % last column
-lastCol = size(C,2);
+lastMol = size(M,2);
 
 beta = [n+1, n+2, n+3];       
       
 while true 
   
-disp('C=');
-disp(C);
+format short g;
+  
+disp('M=');
+disp(M);
 disp('beta=');
 disp(beta);
 
 % cl = lowest col number
-[lowest,cl] = min(C(1:1,1:n));
+[lowest,cl] = min(M(1:1,1:n));
 
 if (lowest >= 0)
    break
@@ -48,7 +50,7 @@ endif
 lambda = [];
 
 for (row = 2:lastRow)
-   lambda(end+1) = C(row,lastCol) ./ C(row, cl);
+   lambda(end+1) = M(row,lastMol) ./ M(row, cl);
 end
 
 lambda(lambda < 0) = NaN;
@@ -56,38 +58,38 @@ lambda(lambda < 0) = NaN;
 beta(k_ind) = cl;
 base_row = k_ind + 1;
 
-el = C(base_row,cl);
-C(base_row, :) = C(base_row, :) ./ el;
+el = M(base_row,cl);
+M(base_row, :) = M(base_row, :) ./ el;
 
 for (row = 2:lastRow)
-  el = C(row, cl);
+  el = M(row, cl);
   if (el ~= 0)
-    C(row, :) = C(row, :) ./ el;
+    M(row, :) = M(row, :) ./ el;
     if (row ~= base_row)
-      C(row, :) = C(row, :) - C(base_row, :);
+      M(row, :) = M(row, :) - M(base_row, :);
     endif
   endif
 endfor
 
-C(1, :) = C(1, :) - C(base_row, :) .* lowest;
+M(1, :) = M(1, :) - M(base_row, :) .* lowest;
 endwhile
 
 RES = [];
 
-for (col = 1:lastCol-1)
-  el = C(1,col);
+for (col = 1:lastMol-1)
+  el = M(1,col);
   if (el ~= 0)
     RES(end+1) = 0;
   else
     k_x = find(beta==col);
-    C(k_x+1,cl);
-    RES(end+1) = C(k_x+1,lastCol);
+    M(k_x+1,cl);
+    RES(end+1) = M(k_x+1,lastMol);
   endif
 endfor
 
 X = RES(1:n);
 S = RES(n+1:end);
-Fmin = -C(1,lastCol);
+Fmin = -M(1,lastMol);
 
 disp("X=");
 disp(X);
