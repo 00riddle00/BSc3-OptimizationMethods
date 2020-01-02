@@ -4,8 +4,10 @@ function PenaltyMethod
 f = @(X) -X(1) .* X(2) .* X(3);
 
 % apribojimu funkcijos
+% g = 0
 g = @(X) 2*X(1) .* X(2)+2*X(1) .* X(3) +2*X(2) .* X(3) - 1;
 
+% h1,h2,h3 >= 0
 h1 = @(X) -X(1);
 h2 = @(X) -X(2);
 h3 = @(X) -X(3);
