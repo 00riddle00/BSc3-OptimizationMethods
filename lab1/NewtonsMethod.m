@@ -1,4 +1,4 @@
-function NiutonoMetodas
+function NewtonsMethod
 % Niutono metodu randamas funkcijos f(x) minimumas intervale [l,r].
 
 f=@(x)((x.^2-4).^2)/7-1;
