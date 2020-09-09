@@ -1,4 +1,4 @@
-function AuksinisPjuvis
+function GoldenSection
 % Aksinio pjuvio metodu randamas funkcijos f(x) minimumas intervale [l,r].
 
 f=@(x)(((x.^2-4).^2)/7) - 1;
